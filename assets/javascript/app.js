@@ -1,60 +1,108 @@
 $(document).ready(function() {
 
-    let theHeroes = ["Iron Man" , "Captain America" , "Spider-Man", "Thor" , "Black Widow" , "The Scarlett Witch" , "Star Lord" , "Black Panther" , "Shuri" , "Okoye"]
+    let theHeroes = ["Iron Man" , "Captain America" , "Spider-Man", "Thor" , "Black Widow" , "Scarlet Witch" , "Star Lord" , "Black Panther" , "Shuri" , "Okoye"]
+    
 
-    console.log(theHeroes)
+     for (let i = 0 ; i < theHeroes.length ; i++ ) {
+        // console.log(theHeroes[i])
+        let heroes = theHeroes[i]
 
-    for (let i = 0 ; i < theHeroes.length ; i++ ) {
-            // console.log(theHeroes[i])
-            let heroes = theHeroes[i]
-            iNeedAButton(heroes)
-    }
+        iNeedAButton(heroes)       
 
-    $(".heroes").on("click" , function() {
-
-        console.log($(this).attr("hero-name"))
-        let name = $(this).attr("hero-name")
-        getMeTheGifs(name)
-    })
+     }
 
     $("#add-hero").on("click", function(){
 
-        userInput = $("#user-hero").val().trim();
+        userInput = $("#user-hero").val().trim()
+
+        theHeroes.push(userInput)
         console.log(userInput)
+        console.log(theHeroes)
         iNeedAButton(userInput)
-        getMeTheGifs(userInput)
 
     })
 
     //this function creates the button
-    function iNeedAButton(SomeHeroes) {
+    function iNeedAButton(SomeHeroes) {        
+           
+            let theButton = $("<button>")        
+            theButton.addClass("heroes")
+            theButton.attr("hero-name" , SomeHeroes )
+            theButton.text(SomeHeroes)
+            $("#theHeroes").append(theButton)
+        }
 
-        let theButton = $("<button>")        
-        theButton.addClass("heroes")
-        theButton.attr("hero-name" , SomeHeroes )
-        theButton.text(SomeHeroes)
-        $("#theHeroes").append(theButton)
 
-    }
+
 
     function getMeTheGifs(userInput) {
 
-        let query = userInput
-        let queryURL = "https://api.giphy.com/v1/gifs/random?q=" + userInput + "&limit=10" + "&api_key=MUy4k5IFeTXQaYMKXy6sCdQsrAx86md2" 
+        let query = userInput.trim()
+        let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + query + "&limit=10" + "&api_key=MUy4k5IFeTXQaYMKXy6sCdQsrAx86md2" 
 
-        console.log(queryURL)
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response){            
+
+            let results = response.data
+
+            console.log(results)
+
+            for (let i = 0 ; i < results.length ;i++ ) {
+                
+                let theDiv = $("<div>")
+                let ratings = results[i].rating
+
+                let PTag = $("<p>").text(`Rating: ${ratings}`)
+                
+                // let URL = results[i].images.original_still.url
+                let theAnimate = results[i].images.downsized.url
+                let theStill = results[i].images.downsized_still.url
+
+                let theGif = $("<img>")
+                            .addClass("hero-gif")
+                            .attr("src" , theStill)
+                            .attr("data-animate" , theAnimate)
+                            .attr("width", 200)                            
+                            .attr("data-still" , theStill)      
+                            .attr("data-state" , "still")
+                
+                theDiv.prepend(PTag)
+                theDiv.prepend(theGif)
+                
+
+                $("#theGifs").prepend(theDiv)
+
+                console.log(theGif)
+            }
+
+        })
 
     }
 
+    $(document).on("click", ".hero-gif" , function(){
+
+        let state = $(this).attr("data-state")
+
+        if (state === "still") {
+            $(this).attr("src" , $(this).attr("data-animate"))
+            $(this).attr("data-state" , "animate")
+        } else {
+            $(this).attr("src" , $(this).attr("data-still"))
+            $(this).attr("data-state" , "still")
+        }
+        
+    })
 
 
+    $(document.body).on("click", ".heroes", function() {
 
-
-
-
-
-
-
+        console.log($(this).attr("hero-name"))
+        let name = $(this).attr("hero-name")
+        getMeTheGifs(name)
+  
+      });
 
 
 }) // document ready end bracket
