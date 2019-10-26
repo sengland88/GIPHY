@@ -11,9 +11,14 @@ $(document).ready(function() {
 
      }
 
-    $("#add-hero").on("click", function(event){
+    $("#tryAgain").hide()
+    $("#giffy").hide()
 
+    $("#add-hero").on("click", function(event){
+    
         event.preventDefault()
+        $("theClear").empty()
+        
 
         userInput = $("#user-hero").val().trim()
         // const miniHeroes = theHeroes.map(function(hero) {
@@ -26,13 +31,16 @@ $(document).ready(function() {
             return hero.toLowerCase() === userInput.toLowerCase()
         })) {
             console.log("this already exists")
+            $("#tryAgain").show()
+
         } else {
+            $("#tryAgain").hide()
             theHeroes.push(userInput)
             console.log(userInput)
             console.log(theHeroes)
             iNeedAButton(userInput)
         }       
-
+        
     })
 
     //this function creates the button
@@ -48,6 +56,8 @@ $(document).ready(function() {
 
     function getMeTheGifs(userInput) {
 
+        $("#giffy").show()
+
         let query = userInput.trim()
         let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + query + "&limit=10" + "&api_key=MUy4k5IFeTXQaYMKXy6sCdQsrAx86md2" 
 
@@ -62,10 +72,10 @@ $(document).ready(function() {
 
             for (let i = 0 ; i < results.length ;i++ ) {
                 
-                let theDiv = $("<span>")
+                let theDiv = $("<div>").addClass("theTile")
                 let ratings = results[i].rating
 
-                let PTag = $("<span>").text(`Rating: ${ratings}`)
+                let PTag = $("<p>").text(`Rating: ${ratings}`)
                 
                 // let URL = results[i].images.original_still.url
                 let theAnimate = results[i].images.downsized.url

@@ -4,17 +4,26 @@ body {
     
 }
 
+#theTitle {
+    font-size:72px;
+    font-weight: bolder;
+    margin-bottom: 30px;
+}
+
 .turtle {
-
     background-color: white;
+}
 
+.message {
+    font-family: 'Neucha', cursive;
+    font-size: 20px;
 }
 
 .heroes {
 
-    background-color: #f4511e;
+    background-color: #999999;
     border: none;
-    color: white;
+    color: #a50000;
     padding: 16px 32px;
     text-align: center;
     font-size: 16px;
@@ -24,4 +33,9 @@ body {
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
+}
+
+.theTile {
+    display: inline-block;    
+    margin: 10px;
 }

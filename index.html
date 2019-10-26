@@ -4,6 +4,7 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Neucha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -15,34 +16,58 @@
                     <div class="col-sm">
 
                             <div class="jumbotron">
-                                <h1 class="display-4">Avengers Assemble!</h1>
+                                <h1 class="display-4 text-center" id="theTitle">Avengers Assemble!</h1>
                                 <p><img src="assets/images/banner.jpg" class="img-fluid" alt="Responsive image"></p>
                                 <br>
-                                <p><input type="text" id="user-hero"></p>
-                                <a class="btn btn-primary btn-lg" href="#" role="button" id="add-hero" type="submit" value="Submit">Learn more</a>
-                            </div>
-                            
+                                <p class="message">Once again, Earth's Mightiest Heroes, the Avengers, need your help. A powerful sorcerer has erased the Avengers' memories and they cannot remember who they are or how to use their special abilities.</p>
+                                    
+                                <p class="message">With the help of Friday, Karen and Jarvis, Tony Stark's powerful AIs, I have built a webpage that will pull in the Avengers' memories in the form of GIFs (supplied by the GIPHY API). All you need is click on a button to load 10 memories onto the screen. The AIs will take care of the rest.</p> 
+                                    
+                                <p class="message">To get you started, I have preloaded some Avengers' names into the system ... but I had to quickly take shelter.</p>
+
+                                <p class="message"> They need you. I need you. The world needs you. Don't let us down.</p>                            
+
+                                <p class="message">-Shelby</p>                            
+                                <p class="text-center"><input type="text" id="user-hero" id="theClear"></p>
+                                <p class="text-center"><span id="tryAgain">Try again — this button already exists</span></p>
+                                <p class="text-center"><a class="btn btn-primary btn-lg" role="button" id="add-hero" type="submit" value="Submit" >Assemble an Avenger!</a></p>
+                            </div>                            
                     </div>
 
                 </div>
-
+                
                 <div class="row">
 
                     <div class="col-sm">
 
-                            <div id="theHeroes"></div>                           
+                            <div id="theHeroes"></div>                             
 
                     </div>
 
                 </div>
 
+                <br>
+                <br>
+
+                <div class="row">
+
+                        <div class="col-sm">
+    
+                                <h2 id="giffy" class="text-center">Click a GIF to animate it ... then click it again to pause it.</h2> 
+    
+                        </div>
+    
+                    </div>
+
                         
-                <br>        
+                <br>
                 <br>
 
                 <div class="row">
 
                     <div class="col-sm">
+
+                            <h2></h2>
 
                             <div id="theGifs"></div> 
                     </div>
