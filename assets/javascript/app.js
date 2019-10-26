@@ -31,8 +31,9 @@ $(document).ready(function() {
             return hero.toLowerCase() === userInput.toLowerCase()
         })) {
             console.log("this already exists")
-            $("#tryAgain").show()
-
+            $("#tryAgain").show().text("Try again - this button already exists")
+        } else if (userInput === ""){
+            $("#tryAgain").show().text("No text provided - please enter an Avengers' name")
         } else {
             $("#tryAgain").hide()
             theHeroes.push(userInput)
@@ -56,8 +57,9 @@ $(document).ready(function() {
 
     function getMeTheGifs(userInput) {
 
-        $("#giffy").show()
-
+        $("#giffy").show()    
+        $("#theGifs").empty()    
+       
         let query = userInput.trim()
         let queryURL = "https://api.giphy.com/v1/gifs/search?q=" + query + "&limit=10" + "&api_key=MUy4k5IFeTXQaYMKXy6sCdQsrAx86md2" 
 
