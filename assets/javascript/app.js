@@ -7,18 +7,31 @@ $(document).ready(function() {
         // console.log(theHeroes[i])
         let heroes = theHeroes[i]
 
-        iNeedAButton(heroes)       
+        iNeedAButton(heroes)
 
      }
 
-    $("#add-hero").on("click", function(){
+    $("#add-hero").on("click", function(event){
+
+        event.preventDefault()
 
         userInput = $("#user-hero").val().trim()
-
-        theHeroes.push(userInput)
-        console.log(userInput)
-        console.log(theHeroes)
-        iNeedAButton(userInput)
+        // const miniHeroes = theHeroes.map(function(hero) {
+        //     return hero.toLowerCase();
+        // })
+        // if (miniHeroes.includes(userInput.toLowerCase())) {
+        //     console.log("this already exists")
+        // }
+        if (theHeroes.find(function(hero) {
+            return hero.toLowerCase() === userInput.toLowerCase()
+        })) {
+            console.log("this already exists")
+        } else {
+            theHeroes.push(userInput)
+            console.log(userInput)
+            console.log(theHeroes)
+            iNeedAButton(userInput)
+        }       
 
     })
 
@@ -30,9 +43,7 @@ $(document).ready(function() {
             theButton.attr("hero-name" , SomeHeroes )
             theButton.text(SomeHeroes)
             $("#theHeroes").append(theButton)
-        }
-
-
+    }
 
 
     function getMeTheGifs(userInput) {
@@ -51,10 +62,10 @@ $(document).ready(function() {
 
             for (let i = 0 ; i < results.length ;i++ ) {
                 
-                let theDiv = $("<div>")
+                let theDiv = $("<span>")
                 let ratings = results[i].rating
 
-                let PTag = $("<p>").text(`Rating: ${ratings}`)
+                let PTag = $("<span>").text(`Rating: ${ratings}`)
                 
                 // let URL = results[i].images.original_still.url
                 let theAnimate = results[i].images.downsized.url
